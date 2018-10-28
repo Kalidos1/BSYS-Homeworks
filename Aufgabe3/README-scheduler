@@ -114,3 +114,133 @@ And you can always run
 
 to get a complete list of flags and options (including options such as setting
 the time quantum for the RR scheduler).
+
+Question 1:
+
+- FIFO:
+Here is the job list, with the run time of each job:
+  Job 0 ( length = 200.0 )
+  Job 1 ( length = 200.0 )
+  Job 2 ( length = 200.0 )
+
+- Final statistics:
+  Job   0 -- Response: 0.00 Turnaround 200  Wait 0.00
+  Job   1 -- Response: 200  Turnaround 400  Wait 200
+  Job   2 -- Response: 400  Turnaround 600  Wait 400
+
+  Average -- Response: 200  Turnaround 400 Wait 200
+
+- SJF: 
+ The same as FIFO
+
+ Question 2:
+
+ - FIFO:
+
+ Here is the job list, with the run time of each job:
+  Job 0 ( length = 100.0 )
+  Job 1 ( length = 200.0 )
+  Job 2 ( length = 300.0 )
+
+  - Final statistics:
+  Job   0 -- Response: 0.00 Turnaround 100  Wait 0.00
+  Job   1 -- Response: 100  Turnaround 300  Wait 100
+  Job   2 -- Response: 300  Turnaround 600  Wait 300
+
+  Average -- Response: 133 Turnaround 333 Wait 133
+
+  - SJF:
+The same for FIFO and the same for different order of Jobs, e.g.
+Here is the job list, with the run time of each job:
+  Job 0 ( length = 300.0 )
+  Job 1 ( length = 200.0 )
+  Job 2 ( length = 100.0 )
+
+  Question 3:
+  
+  -RR :
+  Here is the job list, with the run time of each job:
+  Job 0 ( length = 100.0 )
+  Job 1 ( length = 200.0 )
+  Job 2 ( length = 300.0 )
+
+  - Final statistics:
+  Job   0 -- Response: 0  Turnaround 298  Wait 198 ?
+  Job   1 -- Response: 1  Turnaround 499  Wait 299 ? 
+  Job   2 -- Response: 2  Turnaround 600  Wait 300 ? 
+
+  Average -- Response: 1 Turnaround 465 Wait 265
+ 
+Question 4:
+
+- All jobs arrive at the same time
+- All jobs only use the CPU 
+- Same amount of time
+-> Question 1/2
+
+Question 5:
+
+- All jobs arrive at 0 
+- Either the SJF has to have very little amount of Job length or the time slizes of the RR need to 
+be way greater
+./scheduler.py -p SJF -j 3 -l 1,1,3 -c
+python ./scheduler.py -p RR -j 3 -l 100,200,300 -c
+
+=> same response time
+
+Question 6:
+
+- As long as there are 2 relativly small jobs the response time doesnt increase and stays the same, 
+but if all jobs increase in time simultaneously the Response Time increases also
+
+ARG policy SJF
+ARG jlist 100,200,301230
+
+Here is the job list, with the run time of each job:
+  Job 0 ( length = 100.0 )
+  Job 1 ( length = 200.0 )
+  Job 2 ( length = 301230.0 )
+
+
+** Solutions **
+
+Execution trace:
+  [ time   0 ] Run job 0 for 100.00 secs ( DONE at 100.00 )
+  [ time 100 ] Run job 1 for 200.00 secs ( DONE at 300.00 )
+  [ time 300 ] Run job 2 for 301230.00 secs ( DONE at 301530.00 )
+
+Final statistics:
+  Job   0 -- Response: 0.00  Turnaround 100.00  Wait 0.00
+  Job   1 -- Response: 100.00  Turnaround 300.00  Wait 100.00
+  Job   2 -- Response: 300.00  Turnaround 301530.00  Wait 300.00
+
+  Average -- Response: 133.33  Turnaround 100643.33  Wait 133.33
+
+  ARG policy SJF
+ARG jlist 112300,201230,301230
+
+Here is the job list, with the run time of each job:
+  Job 0 ( length = 112300.0 )
+  Job 1 ( length = 201230.0 )
+  Job 2 ( length = 301230.0 )
+
+
+** Solutions **
+
+Execution trace:
+  [ time   0 ] Run job 0 for 112300.00 secs ( DONE at 112300.00 )
+  [ time 112300 ] Run job 1 for 201230.00 secs ( DONE at 313530.00 )
+  [ time 313530 ] Run job 2 for 301230.00 secs ( DONE at 614760.00 )
+
+Final statistics:
+  Job   0 -- Response: 0.00  Turnaround 112300.00  Wait 0.00
+  Job   1 -- Response: 112300.00  Turnaround 313530.00  Wait 112300.00
+  Job   2 -- Response: 313530.00  Turnaround 614760.00  Wait 313530.00
+
+  Average -- Response: 141943.33  Turnaround 346863.33  Wait 141943.33
+
+  Question 7:
+
+- The Response Time only increases more as quantum lentgh increases
+-  /3
+
