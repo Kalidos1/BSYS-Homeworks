@@ -1,0 +1,202 @@
+Homework 2:
+
+Question 1:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <fcntl.h>
+#include <assert.h>
+#include <sys/wait.h>
+
+int main (int argc, char *argv[])
+{   
+    printf("hello world (pid:%d)\n", (int) getpid());
+    int x = 100;    
+    int rc = fork();    
+    if (rc < 0) {
+        // fork failed; exit
+        fprintf(stderr, "fork failed\n");
+        exit(1);
+    } else if (rc == 0) {
+        // child (new process)
+        x += 55;
+        printf("Value of x:%d\n", x);  
+        printf("hello, I am child (pid:%d)\n", (int) getpid());
+        
+    } else {
+        // parent goes down this path (original process)
+        x += 45;
+        int wc = wait(NULL);
+        printf("Value of x:%d\n", x);
+        printf("hello, I am parent of %d (wc:%d) (pid:%d)\n",
+	       rc, wc, (int) getpid());
+           
+    }
+    return 0;
+}
+
+- The value is the Same e.g. 100 because it clones the main process
+hello world (pid:6284)
+Value of x:100
+hello, I am child (pid:8040)
+Value of x:100
+hello, I am parent of 8040 (wc:8040) (pid:6284)
+
+- The values only get changed individually and not both so that x is 155 in the one process
+and 145 in the other
+
+hello world (pid:19132)
+Value of x:155			(x + 55)
+hello, I am child (pid:14244)
+Value of x:145			(x + 45)
+hello, I am parent of 14244 (wc:14244) (pid:19132)
+
+Question 2:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <fcntl.h>
+#include <assert.h>
+#include <sys/wait.h>
+
+int main (int argc, char *argv[])
+{   
+    printf("hello world (pid:%d)\n", (int) getpid());
+    close(STDOUT_FILENO); 
+	open("./fork.output", O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU);      
+    int rc = fork();    
+    if (rc < 0) {
+        // fork failed; exit
+        fprintf(stderr, "fork failed\n");
+        exit(1);
+    } else if (rc == 0) {
+        // child (new process)
+        printf("hello, I am child (pid:%d)\n", (int) getpid());
+        
+    } else {
+        // parent goes down this path (original process)
+        int wc = wait(NULL);
+        printf("hello, I am parent of %d (pid:%d)\n",
+	       rc, (int) getpid());
+           
+    }
+    return 0;
+}
+
+- Both can acces the output file 
+
+hello, I am child (pid:7504)
+hello, I am parent of 7504 (wc:7504) (pid:5720)
+
+- Both can write concurrently on the same file
+
+hello, I am parent of 18504 (pid:1012)
+hello, I am child (pid:18504)
+
+Question 3:
+
+- idk if it can without calling a wait()
+
+Question 4:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <fcntl.h>
+#include <assert.h>
+#include <sys/wait.h>
+
+int main (int argc, char *argv[])
+{   
+    printf("hello world (pid:%d)\n", (int) getpid());   
+    int rc = fork();    
+    if (rc < 0) {
+        // fork failed; exit
+        fprintf(stderr, "fork failed\n");
+        exit(1);
+    } else if (rc == 0) {
+        // child (new process)    
+        char *myargs[3];
+        myargs[0] = strdup("/bin/ls"); 
+        myargs[1] = NULL;
+        execv(myargs[0],myargs);
+        printf("hello, I am child (pid:%d)\n", (int) getpid());
+        
+    } else {
+        // parent goes down this path (original process)
+        int wc = wait(NULL);
+        printf("hello, I am parent of %d (wc:%d) (pid:%d)\n",
+	       rc, wc, (int) getpid());
+           
+    }
+    return 0;
+}
+
+- execv/execvp works (the other dont work) =>
+hello world (pid:12940)
+fork.c  fork.exe  fork.output  fork2.c  fork2.exe  Makefile.txt  p1.c  p1.exe  p2.c  p2.exe  p3.c  p3.exe  p4.c  p4.exe  p4.output
+hello, I am parent of 4204 (wc:4204) (pid:12940)
+
+- Because you can have multiple programs of many different types, so there is a method for
+everything
+
+Question 5:
+
+- Wait() returns the PID-ID of the Child Process on which the parent process waites
+
+hello world (pid:16068)
+hello, I am child (pid:11576)
+hello, I am parent of 11576 (wc:11576) (pid:16068)
+
+- Wait() returns -1 if you use it in the Child Process, its runs normal
+
+hello world (pid:16880)
+hello, I am parent of 5388 (pid:16880)hello, I am child (wc:-1) (pid:5388)
+
+Question 6: ????????
+
+Question 7:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <fcntl.h>
+#include <assert.h>
+#include <sys/wait.h>
+
+int main (int argc, char *argv[])
+{   
+    printf("hello world (pid:%d)\n", (int) getpid());   
+    int rc = fork();    
+    if (rc < 0) {
+        // fork failed; exit
+        fprintf(stderr, "fork failed\n");
+        exit(1);
+    } else if (rc == 0) {
+        // child (new process)
+        close(STDOUT_FILENO); 
+        printf("hello, I am child (pid:%d)\n",  (int) getpid());
+    } else {
+        // parent goes down this path (original process)        
+        printf("hello, I am parent of %d (pid:%d)\n",
+	       rc, (int) getpid());
+           
+    }
+    return 0;
+}
+
+- After closing the SO nothing gets displayed after calling printf
+
+hello world (pid:1700)
+hello, I am parent of 15896 (pid:1700)
+
+
+
+
+
