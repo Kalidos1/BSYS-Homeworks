@@ -9,25 +9,21 @@
 int main (int argc, char *argv[])
 {   
     printf("hello world (pid:%d)\n", (int) getpid());   
-    int rc = fork();
-    int rc2 = fork();    
+    int rc = fork(); 
     if (rc < 0) {
         // fork failed; exit
         fprintf(stderr, "fork failed\n");
         exit(1);
-    } else if (rc == 0 && rc2 != 0) {
+    } else if (rc == 0) {
         // child (new process)
         printf("hello, I am child1 (pid:%d)\n",  (int) getpid());
-    } else if (rc2 == 0 && rc != 0) {
-        printf("hello, I am child2 (pid:%d)\n",  (int) getpid());
     } else {
         // parent goes down this path (original process)
-        if (rc > 0) {
+        // fork here to get a 2nd child then create array[1] with input/output for both children   
+        // then pipe with this array and create a connection between those 2 children       
         printf("hello, I am parent of %d (pid:%d)\n",
 	       rc, (int) getpid());
-        } else if (rc2 > 0)
-        printf("hello, I am parent of %d (pid:%d)\n",
-	       rc2, (int) getpid());
+     
         
     }
     return 0;
