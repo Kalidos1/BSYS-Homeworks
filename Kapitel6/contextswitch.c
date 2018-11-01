@@ -22,6 +22,7 @@ int main(int argc, char const *argv[])
     CPU_ZERO(&mask);
     unsigned int lenght = sizeof(mask);
     CPU_SET(0, &mask);
+
   
     pipe(pipem);
     

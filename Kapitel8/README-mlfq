@@ -174,3 +174,248 @@ milliseconds or whatever you set it to with this flag.
 You can also play around with whether jobs that just complete an I/O are moved
 to the head of the queue they are in or to the back, with the -I flag. Check
 it out, it's fun! 
+
+
+Question 1:
+
+./mlfq.py --jlist 0,20,0:10,15,0 -n 2 -q 5 -c:
+
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 2
+OPTIONS allotments for queue  1 is   1
+OPTIONS quantum length for queue  1 is   5
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is   5
+OPTIONS boost 0
+OPTIONS ioTime 5
+OPTIONS stayAfterIO False
+OPTIONS iobump False
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime  20 - ioFreq   0
+  Job  1: startTime  10 - runTime  15 - ioFreq   0
+
+
+Execution Trace:
+
+[ time 0 ] JOB BEGINS by JOB 0
+[ time 0 ] Run JOB 0 at PRIORITY 1 [ TICKS 4 ALLOT 1 TIME 19 (of 20) ]
+[ time 1 ] Run JOB 0 at PRIORITY 1 [ TICKS 3 ALLOT 1 TIME 18 (of 20) ]
+[ time 2 ] Run JOB 0 at PRIORITY 1 [ TICKS 2 ALLOT 1 TIME 17 (of 20) ]
+[ time 3 ] Run JOB 0 at PRIORITY 1 [ TICKS 1 ALLOT 1 TIME 16 (of 20) ]
+[ time 4 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 15 (of 20) ]
+[ time 5 ] Run JOB 0 at PRIORITY 0 [ TICKS 4 ALLOT 1 TIME 14 (of 20) ]
+[ time 6 ] Run JOB 0 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 13 (of 20) ]
+[ time 7 ] Run JOB 0 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 12 (of 20) ]
+[ time 8 ] Run JOB 0 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 11 (of 20) ]
+[ time 9 ] Run JOB 0 at PRIORITY 0 [ TICKS 0 ALLOT 1 TIME 10 (of 20) ]
+[ time 10 ] JOB BEGINS by JOB 1
+[ time 10 ] Run JOB 1 at PRIORITY 1 [ TICKS 4 ALLOT 1 TIME 14 (of 15) ]
+[ time 11 ] Run JOB 1 at PRIORITY 1 [ TICKS 3 ALLOT 1 TIME 13 (of 15) ]
+[ time 12 ] Run JOB 1 at PRIORITY 1 [ TICKS 2 ALLOT 1 TIME 12 (of 15) ]
+[ time 13 ] Run JOB 1 at PRIORITY 1 [ TICKS 1 ALLOT 1 TIME 11 (of 15) ]
+[ time 14 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 10 (of 15) ]
+[ time 15 ] Run JOB 0 at PRIORITY 0 [ TICKS 4 ALLOT 1 TIME 9 (of 20) ]
+[ time 16 ] Run JOB 0 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 8 (of 20) ]
+[ time 17 ] Run JOB 0 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 7 (of 20) ]
+[ time 18 ] Run JOB 0 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 6 (of 20) ]
+[ time 19 ] Run JOB 0 at PRIORITY 0 [ TICKS 0 ALLOT 1 TIME 5 (of 20) ]
+[ time 20 ] Run JOB 1 at PRIORITY 0 [ TICKS 4 ALLOT 1 TIME 9 (of 15) ]
+[ time 21 ] Run JOB 1 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 8 (of 15) ]
+[ time 22 ] Run JOB 1 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 7 (of 15) ]
+[ time 23 ] Run JOB 1 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 6 (of 15) ]
+[ time 24 ] Run JOB 1 at PRIORITY 0 [ TICKS 0 ALLOT 1 TIME 5 (of 15) ]
+[ time 25 ] Run JOB 0 at PRIORITY 0 [ TICKS 4 ALLOT 1 TIME 4 (of 20) ]
+[ time 26 ] Run JOB 0 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 3 (of 20) ]
+[ time 27 ] Run JOB 0 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 2 (of 20) ]
+[ time 28 ] Run JOB 0 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 1 (of 20) ]
+[ time 29 ] Run JOB 0 at PRIORITY 0 [ TICKS 0 ALLOT 1 TIME 0 (of 20) ]
+[ time 30 ] FINISHED JOB 0
+[ time 30 ] Run JOB 1 at PRIORITY 0 [ TICKS 4 ALLOT 1 TIME 4 (of 15) ]
+[ time 31 ] Run JOB 1 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 3 (of 15) ]
+[ time 32 ] Run JOB 1 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 2 (of 15) ]
+[ time 33 ] Run JOB 1 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 1 (of 15) ]
+[ time 34 ] Run JOB 1 at PRIORITY 0 [ TICKS 0 ALLOT 1 TIME 0 (of 15) ]
+[ time 35 ] FINISHED JOB 1
+
+Final statistics:
+  Job  0: startTime   0 - response   0 - turnaround  30
+  Job  1: startTime  10 - response   0 - turnaround  25
+
+  Avg  1: startTime n/a - response 0.00 - turnaround 27.50
+
+./mlfq.py --jlist 0,15,0:0,10,0 -n 2 -Q 3,4 -c: 
+
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 2
+OPTIONS allotments for queue  1 is   1
+OPTIONS quantum length for queue  1 is   3
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is   4
+OPTIONS boost 0
+OPTIONS ioTime 5
+OPTIONS stayAfterIO False
+OPTIONS iobump False
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime  15 - ioFreq   0
+  Job  1: startTime   0 - runTime  10 - ioFreq   0
+
+
+Execution Trace:
+
+[ time 0 ] JOB BEGINS by JOB 0
+[ time 0 ] JOB BEGINS by JOB 1
+[ time 0 ] Run JOB 0 at PRIORITY 1 [ TICKS 2 ALLOT 1 TIME 14 (of 15) ]
+[ time 1 ] Run JOB 0 at PRIORITY 1 [ TICKS 1 ALLOT 1 TIME 13 (of 15) ]
+[ time 2 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 12 (of 15) ]
+[ time 3 ] Run JOB 1 at PRIORITY 1 [ TICKS 2 ALLOT 1 TIME 9 (of 10) ]
+[ time 4 ] Run JOB 1 at PRIORITY 1 [ TICKS 1 ALLOT 1 TIME 8 (of 10) ]
+[ time 5 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 7 (of 10) ]
+[ time 6 ] Run JOB 0 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 11 (of 15) ]
+[ time 7 ] Run JOB 0 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 10 (of 15) ]
+[ time 8 ] Run JOB 0 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 9 (of 15) ]
+[ time 9 ] Run JOB 0 at PRIORITY 0 [ TICKS 0 ALLOT 1 TIME 8 (of 15) ]
+[ time 10 ] Run JOB 1 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 6 (of 10) ]
+[ time 11 ] Run JOB 1 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 5 (of 10) ]
+[ time 12 ] Run JOB 1 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 4 (of 10) ]
+[ time 13 ] Run JOB 1 at PRIORITY 0 [ TICKS 0 ALLOT 1 TIME 3 (of 10) ]
+[ time 14 ] Run JOB 0 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 7 (of 15) ]
+[ time 15 ] Run JOB 0 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 6 (of 15) ]
+[ time 16 ] Run JOB 0 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 5 (of 15) ]
+[ time 17 ] Run JOB 0 at PRIORITY 0 [ TICKS 0 ALLOT 1 TIME 4 (of 15) ]
+[ time 18 ] Run JOB 1 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 2 (of 10) ]
+[ time 19 ] Run JOB 1 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 1 (of 10) ]
+[ time 20 ] Run JOB 1 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 0 (of 10) ]
+[ time 21 ] FINISHED JOB 1
+[ time 21 ] Run JOB 0 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 3 (of 15) ]
+[ time 22 ] Run JOB 0 at PRIORITY 0 [ TICKS 2 ALLOT 1 TIME 2 (of 15) ]
+[ time 23 ] Run JOB 0 at PRIORITY 0 [ TICKS 1 ALLOT 1 TIME 1 (of 15) ]
+[ time 24 ] Run JOB 0 at PRIORITY 0 [ TICKS 0 ALLOT 1 TIME 0 (of 15) ]
+[ time 25 ] FINISHED JOB 0
+
+Final statistics:
+  Job  0: startTime   0 - response   0 - turnaround  25
+  Job  1: startTime   0 - response   3 - turnaround  21
+
+  Avg  1: startTime n/a - response 1.50 - turnaround 23.00
+
+
+./mlfq.py --jlist 0,15,0:0,10,0 -n 2 -Q 3,4 -B 2 -c : 
+
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 2
+OPTIONS allotments for queue  1 is   1
+OPTIONS quantum length for queue  1 is   3
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is   4
+OPTIONS boost 2
+OPTIONS ioTime 5
+OPTIONS stayAfterIO False
+OPTIONS iobump False
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime  15 - ioFreq   0
+  Job  1: startTime   0 - runTime  10 - ioFreq   0
+
+
+Execution Trace:
+
+[ time 0 ] JOB BEGINS by JOB 0
+[ time 0 ] JOB BEGINS by JOB 1
+[ time 0 ] Run JOB 0 at PRIORITY 1 [ TICKS 2 ALLOT 1 TIME 14 (of 15) ]
+[ time 1 ] Run JOB 0 at PRIORITY 1 [ TICKS 1 ALLOT 1 TIME 13 (of 15) ]
+[ time 2 ] BOOST ( every 2 )
+[ time 2 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 12 (of 15) ]
+[ time 3 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 9 (of 10) ]
+[ time 4 ] BOOST ( every 2 )
+[ time 4 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 11 (of 15) ]
+[ time 5 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 8 (of 10) ]
+[ time 6 ] BOOST ( every 2 )
+[ time 6 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 10 (of 15) ]
+[ time 7 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 7 (of 10) ]
+[ time 8 ] BOOST ( every 2 )
+[ time 8 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 9 (of 15) ]
+[ time 9 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 6 (of 10) ]
+[ time 10 ] BOOST ( every 2 )
+[ time 10 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 8 (of 15) ]
+[ time 11 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 5 (of 10) ]
+[ time 12 ] BOOST ( every 2 )
+[ time 12 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 7 (of 15) ]
+[ time 13 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 4 (of 10) ]
+[ time 14 ] BOOST ( every 2 )
+[ time 14 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 6 (of 15) ]
+[ time 15 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 3 (of 10) ]
+[ time 16 ] BOOST ( every 2 )
+[ time 16 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 5 (of 15) ]
+[ time 17 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 2 (of 10) ]
+[ time 18 ] BOOST ( every 2 )
+[ time 18 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 4 (of 15) ]
+[ time 19 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 1 (of 10) ]
+[ time 20 ] BOOST ( every 2 )
+[ time 20 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 3 (of 15) ]
+[ time 21 ] Run JOB 1 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 0 (of 10) ]
+[ time 22 ] FINISHED JOB 1
+[ time 22 ] BOOST ( every 2 )
+[ time 22 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 2 (of 15) ]
+[ time 23 ] Run JOB 0 at PRIORITY 0 [ TICKS 3 ALLOT 1 TIME 1 (of 15) ]
+[ time 24 ] BOOST ( every 2 )
+[ time 24 ] Run JOB 0 at PRIORITY 1 [ TICKS 0 ALLOT 1 TIME 0 (of 15) ]
+[ time 25 ] FINISHED JOB 0
+
+Final statistics:
+  Job  0: startTime   0 - response   0 - turnaround  25
+  Job  1: startTime   0 - response   3 - turnaround  22
+
+  Avg  1: startTime n/a - response 1.50 - turnaround 23.50
+
+
+Question 2:
+
+Figure 8.2 -> ./mlfq.py --jlist 0,200,0 -n 3 -q 10 -c
+Figure 8.3 -> ./mlfq.py --jlist 0,200,0:100,20,0 -n 3 -q 10 -c
+Figure 8.4 -> ./mlfq.py --jlist 0,200,0:50,25,1 -n 3 -q 10 -S -c
+Figure 8.5(Without PRIORITY BOOST) -> ./mlfq.py --jlist 0,200,0:100,50,5:100,50,5 -n 3 -q 10 -S -c
+Figure 8.5(With PRIORITY BOOST) -> ./mlfq.py --jlist 0,200,0:100,50,5:100,50,5 -n 3 -q 10 -S -B 50 -c
+Figure 8.6(Without Gaming Tolerance) -> ./mlfq.py --jlist 0,200,0:75,100,9 -n 3 -q 10 -S -i 1 -c
+Figure 8.6(With Gaming Tolerance) -> ./mlfq.py --jlist 0,200,0:75,100,10 -n 3 -q 10 -i 1 -c
+Figure 8.7 -> ./mlfq.py --jlist 0,150,0:0,150,0 -n 3 -Q 10,20,40 -A 2,2,2 -c
+
+Question 3:
+
+./mlfq.py --jlist 0,150,0:0,150,0 -n 3 -q 10 -a 10 -c
+
+Question 4:
+
+./mlfq.py --jlist 0,150,0:0,150,9 -n 3 -q 10 -S -i 1 -c
+
+Question 5:
+
+Every 200 seconds
+
+Question 6:
+
