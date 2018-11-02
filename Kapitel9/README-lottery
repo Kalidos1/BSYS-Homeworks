@@ -122,3 +122,185 @@ Options:
       compute answers for me
 
 
+Question 1:
+
+SEED 1:
+./lottery.py -j 3 -s 1
+ARG jlist
+ARG jobs 3
+ARG maxlen 10
+ARG maxticket 100
+ARG quantum 1
+ARG seed 1
+
+Here is the job list, with the run time of each job:
+  Job 0 ( length = 1, tickets = 84 )
+  Job 1 ( length = 7, tickets = 25 )
+  Job 2 ( length = 4, tickets = 44 )
+-> Mod 153: Total Tickets
+
+Here is the set of random numbers you will need (at most):
+Random 651593 mod 153 = 119 -> Job 2
+Random 788724 mod 153 = 9 -> Job 0 --> Job 0 DONE
+Random 93859 mod 69 = 19 -> Job 1
+Random 28347 mod 69 = 57 -> Job 2
+Random 835765 mod 69 = 37 -> Job 2
+Random 432767 mod 69 = 68 -> Job 2 --> Job 2 DONE
+Random 762280 -
+Random 2106 -
+Random 445387 -
+Random 721540 -
+Random 228762 -
+Random 945271 -> All Job 1 until DONE
+
+SEED 2:
+./lottery.py -j 3 -s 2
+ARG jlist
+ARG jobs 3
+ARG maxlen 10
+ARG maxticket 100
+ARG quantum 1
+ARG seed 2
+
+Here is the job list, with the run time of each job:
+  Job 0 ( length = 9, tickets = 94 )
+  Job 1 ( length = 8, tickets = 73 )
+  Job 2 ( length = 6, tickets = 30 )
+-> 197 Tickets
+
+Here is the set of random numbers you will need (at most):
+Random 605944 mod 197 = 169 -> Job 1
+Random 606802 mod 197 = 42 -> Job 1
+Random 581204 mod 197 = 54 -> Job 1
+Random 158383 usw 
+Random 430670
+Random 393532
+Random 723012
+Random 994820
+Random 949396
+Random 544177
+Random 444854
+Random 268241
+Random 35924
+Random 27444
+Random 464894
+Random 318465
+Random 380015
+Random 891790
+Random 525753
+Random 560510
+Random 236123
+Random 23858
+Random 325143
+
+** Solutions **
+
+Random 605944 -> Winning ticket 169 (of 197) -> Run 2
+  Jobs:  (  job:0 timeleft:9 tix:94 )   (  job:1 timeleft:8 tix:73 )   (* job:2 timeleft:6 tix:30 )
+Random 606802 -> Winning ticket 42 (of 197) -> Run 0
+  Jobs:  (* job:0 timeleft:9 tix:94 )   (  job:1 timeleft:8 tix:73 )   (  job:2 timeleft:5 tix:30 )
+Random 581204 -> Winning ticket 54 (of 197) -> Run 0
+  Jobs:  (* job:0 timeleft:8 tix:94 )   (  job:1 timeleft:8 tix:73 )   (  job:2 timeleft:5 tix:30 )
+Random 158383 -> Winning ticket 192 (of 197) -> Run 2
+  Jobs:  (  job:0 timeleft:7 tix:94 )   (  job:1 timeleft:8 tix:73 )   (* job:2 timeleft:5 tix:30 )
+Random 430670 -> Winning ticket 28 (of 197) -> Run 0
+  Jobs:  (* job:0 timeleft:7 tix:94 )   (  job:1 timeleft:8 tix:73 )   (  job:2 timeleft:4 tix:30 )
+Random 393532 -> Winning ticket 123 (of 197) -> Run 1
+  Jobs:  (  job:0 timeleft:6 tix:94 )   (* job:1 timeleft:8 tix:73 )   (  job:2 timeleft:4 tix:30 )
+Random 723012 -> Winning ticket 22 (of 197) -> Run 0
+  Jobs:  (* job:0 timeleft:6 tix:94 )   (  job:1 timeleft:7 tix:73 )   (  job:2 timeleft:4 tix:30 )
+Random 994820 -> Winning ticket 167 (of 197) -> Run 2
+  Jobs:  (  job:0 timeleft:5 tix:94 )   (  job:1 timeleft:7 tix:73 )   (* job:2 timeleft:4 tix:30 )
+Random 949396 -> Winning ticket 53 (of 197) -> Run 0
+  Jobs:  (* job:0 timeleft:5 tix:94 )   (  job:1 timeleft:7 tix:73 )   (  job:2 timeleft:3 tix:30 )
+Random 544177 -> Winning ticket 63 (of 197) -> Run 0
+  Jobs:  (* job:0 timeleft:4 tix:94 )   (  job:1 timeleft:7 tix:73 )   (  job:2 timeleft:3 tix:30 )
+Random 444854 -> Winning ticket 28 (of 197) -> Run 0
+  Jobs:  (* job:0 timeleft:3 tix:94 )   (  job:1 timeleft:7 tix:73 )   (  job:2 timeleft:3 tix:30 )
+Random 268241 -> Winning ticket 124 (of 197) -> Run 1
+  Jobs:  (  job:0 timeleft:2 tix:94 )   (* job:1 timeleft:7 tix:73 )   (  job:2 timeleft:3 tix:30 )
+Random 35924 -> Winning ticket 70 (of 197) -> Run 0
+  Jobs:  (* job:0 timeleft:2 tix:94 )   (  job:1 timeleft:6 tix:73 )   (  job:2 timeleft:3 tix:30 )
+Random 27444 -> Winning ticket 61 (of 197) -> Run 0
+  Jobs:  (* job:0 timeleft:1 tix:94 )   (  job:1 timeleft:6 tix:73 )   (  job:2 timeleft:3 tix:30 )
+--> JOB 0 DONE at time 14
+Random 464894 -> Winning ticket 55 (of 103) -> Run 1
+  Jobs:  (  job:0 timeleft:0 tix:--- )   (* job:1 timeleft:6 tix:73 )   (  job:2 timeleft:3 tix:30 )
+Random 318465 -> Winning ticket 92 (of 103) -> Run 2
+  Jobs:  (  job:0 timeleft:0 tix:--- )   (  job:1 timeleft:5 tix:73 )   (* job:2 timeleft:3 tix:30 )
+Random 380015 -> Winning ticket 48 (of 103) -> Run 1
+  Jobs:  (  job:0 timeleft:0 tix:--- )   (* job:1 timeleft:5 tix:73 )   (  job:2 timeleft:2 tix:30 )
+Random 891790 -> Winning ticket 16 (of 103) -> Run 1
+  Jobs:  (  job:0 timeleft:0 tix:--- )   (* job:1 timeleft:4 tix:73 )   (  job:2 timeleft:2 tix:30 )
+Random 525753 -> Winning ticket 41 (of 103) -> Run 1
+  Jobs:  (  job:0 timeleft:0 tix:--- )   (* job:1 timeleft:3 tix:73 )   (  job:2 timeleft:2 tix:30 )
+Random 560510 -> Winning ticket 87 (of 103) -> Run 2
+  Jobs:  (  job:0 timeleft:0 tix:--- )   (  job:1 timeleft:2 tix:73 )   (* job:2 timeleft:2 tix:30 )
+Random 236123 -> Winning ticket 47 (of 103) -> Run 1
+  Jobs:  (  job:0 timeleft:0 tix:--- )   (* job:1 timeleft:2 tix:73 )   (  job:2 timeleft:1 tix:30 )
+Random 23858 -> Winning ticket 65 (of 103) -> Run 1
+  Jobs:  (  job:0 timeleft:0 tix:--- )   (* job:1 timeleft:1 tix:73 )   (  job:2 timeleft:1 tix:30 )
+--> JOB 1 DONE at time 22
+Random 325143 -> Winning ticket 3 (of 30) -> Run 2
+  Jobs:  (  job:0 timeleft:0 tix:--- )   (  job:1 timeleft:0 tix:--- )   (* job:2 timeleft:1 tix:30 )
+--> JOB 2 DONE at time 23
+
+SEED 3:
+
+an851goe@ct-bsys-ws18-5:~/BSYS/BSYS-Homeworks/Kapitel9$ ./lottery.py -j 3 -s 3
+ARG jlist
+ARG jobs 3
+ARG maxlen 10
+ARG maxticket 100
+ARG quantum 1
+ARG seed 3
+
+Here is the job list, with the run time of each job:
+  Job 0 ( length = 2, tickets = 54 )
+  Job 1 ( length = 3, tickets = 60 )
+  Job 2 ( length = 6, tickets = 6 )
+
+
+Here is the set of random numbers you will need (at most):
+Random 13168
+Random 837469
+Random 259354
+Random 234331
+Random 995645
+Random 470263
+Random 836462
+Random 476353
+Random 639068
+Random 150616
+Random 634861
+
+Question 2:
+
+- If the Number is so imbalanced it justs runs the 2nd Job 10 Times and then the other job
+- Job 0 has a very small chance of receiving a ticket before Job 2 ends but it is close to 0
+- 1 % Chance
+- Due to the imbalance only one job runs and the other after the first completed, so it manipulates
+the scheduling
+
+Question 3:
+
+- The scheduler comes pretty average to being fair, in this case Job 0 finishes only 8 jobs ahead of Job 1
+ (SEED 0)
+ - The scheduler comes pretty close to being fair, in this case Job 0 finishes only 4 jobs ahead of Job 1
+ (SEED 1)
+ - THe scheduler is not that fair in this case, Job 0 finishes 10 jobs ahead of Job 1
+ (SEED 2)
+ -SEED 3 same as SEED 1
+
+ Question 4:
+
+ -As quantum size gets larger the scheduler gets fairer, the difference between both jobs 
+  finishing gets smaller
+
+  Question 5:
+
+- The Graph would be pretty close to the one in the chapter, but i think the Unfairnessfactor would 
+start a little bit higher
+- 
+
+ 
