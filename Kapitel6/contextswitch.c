@@ -1,4 +1,5 @@
 //GruppenNR 5 - Goehring Andre,Marvin Klett
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +11,7 @@
 int main(int argc, char const *argv[])
 {
 
-    double startpipe,stoppipe;
+    double startpipe,stoppipe,testtime;
     struct timeval time;
     int nbytes;
     int pipem[2];
@@ -36,14 +37,15 @@ int main(int argc, char const *argv[])
         if (childpid == 0) {
             close(pipem[1]);
             nbytes = read(pipem[0],readbuffer,sizeof(readbuffer));
-            printf("Received String: %s ", nbytes);
+            printf("Received String: %s\n ", readbuffer);
             exit(0);
         } else {
             close(pipem[0]);
             write(pipem[1], string, strlen(string) + 1);
             gettimeofday(&time,NULL);
-            stoppipe = time.tv_sec + time.tv_usec;        
-            printf("ContextSwitch Time: %.5f \n", (stoppipe - startpipe));
+            stoppipe = time.tv_sec + time.tv_usec;
+            testtime = stoppipe - startpipe;        
+            printf("ContextSwitch Time: %f \n", testtime);
             close(pipem[1]);
             wait(0);
         }
