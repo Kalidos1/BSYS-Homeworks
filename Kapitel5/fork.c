@@ -27,8 +27,7 @@ int main (int argc, char *argv[])
         int wc = wait(NULL);
         printf("Value of x:%d\n", x);
         printf("hello, I am parent of %d (wc:%d) (pid:%d)\n",
-	       rc, wc, (int) getpid());
-           
+	       rc, wc, (int) getpid());         
            
     }
     return 0;
