@@ -1,10 +1,10 @@
-all: contextswitch systemcall
+all: 5-Chapter6-lde[1] 5-Chapter6-lde[2] 
 
 clean:
-	rm -f contextswitch systemcall
+	rm -f 5-Chapter6-lde[1] 5-Chapter6-lde[1]
 
-systemcall: systemcall.c
-	gcc -o systemcall systemcall.c -Wall
+5-Chapter6-lde[1]: 5-Chapter6-lde[1].c
+	gcc -o 5-Chapter6-lde[1] 5-Chapter6-lde[1].c -Wall
 
-contextswitch: contextswitch.c
-	gcc -o contextswitch contextswitch.c -Wall
+5-Chapter6-lde[2]: 5-Chapter6-lde[2].c
+	gcc -o 5-Chapter6-lde[2] 5-Chapter6-lde[2].c -Wall
