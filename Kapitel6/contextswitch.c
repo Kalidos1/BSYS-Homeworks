@@ -3,9 +3,8 @@
 #include <string.h>
 #include <sys/time.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <pthread.h>
 #include <sched.h>
+#include <sys/wait.h>
 
 int main(int argc, char const *argv[])
 {
@@ -14,38 +13,38 @@ int main(int argc, char const *argv[])
     struct timeval time;
     int nbytes;
     int pipem[2];
-    char* string = "Hello, Test";
+    char* string = "Hallo, Test";
     char readbuffer[100];
     pid_t childpid;
 
-    cpu_set_t  mask;
-    CPU_ZERO(&mask);
-    unsigned int lenght = sizeof(mask);
-    CPU_SET(0, &mask);
+    cpu_set_t  process;
+    CPU_ZERO(&process);
+    unsigned int lenght = sizeof(process);
+    CPU_SET(0, &process);
 
   
     pipe(pipem);
     
-    if ((childpid =fork()) == -1) {
-        // fork failed; exit
+    if ((childpid = fork()) == -1) {    
         perror("fork");
         exit(1);
     }
     gettimeofday(&time,NULL);
     startpipe = time.tv_sec + time.tv_usec;
-    if ((sched_setaffinity(0,lenght,&mask)) < 1) {
+    if ((sched_setaffinity(0,lenght,&process)) < 1) {
         if (childpid == 0) {
-            close(pipem[0]);
-            write(pipem[1],string, strlen(string) + 1);
+            close(pipem[1]);
+            nbytes = read(pipem[0],readbuffer,sizeof(readbuffer));
+            printf("Received String: %s ", readbuffer);
             exit(0);
         } else {
-            nbytes = read(pipem[0],readbuffer,sizeof(readbuffer));
+            close(pipem[0]);
+            write(pipem[1], string, strlen(string) + 1);
             gettimeofday(&time,NULL);
-            stoppipe = time.tv_sec + time.tv_usec;
-
-            printf("Received via Pipe: %s\n", readbuffer);
-            printf("ContextSwitch Time: %.5f \n", stoppipe - startpipe);
+            stoppipe = time.tv_sec + time.tv_usec;        
+            printf("ContextSwitch Time: %.5f \n", (stoppipe - startpipe));
             close(pipem[1]);
+            wait(0);
         }
     }
 

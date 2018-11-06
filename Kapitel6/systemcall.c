@@ -3,9 +3,6 @@
 #include <string.h>
 #include <sys/time.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <pthread.h>
-#include <sched.h>
 
 
 
