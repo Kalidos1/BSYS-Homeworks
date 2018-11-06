@@ -1,3 +1,4 @@
+//GruppenNR 5 - Goehring Andre,Marvin Klett
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
