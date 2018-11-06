@@ -1,0 +1,10 @@
+all: contextswitch systemcall
+
+clean:
+	rm -f contextswitch systemcall
+
+systemcall: systemcall.c
+	gcc -o systemcall systemcall.c -Wall
+
+contextswitch: contextswitch.c
+	gcc -o contextswitch contextswitch.c -Wall

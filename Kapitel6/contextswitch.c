@@ -1,3 +1,4 @@
+//GruppenNR 5 - Goehring Andre,Marvin Klett
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,7 +36,7 @@ int main(int argc, char const *argv[])
         if (childpid == 0) {
             close(pipem[1]);
             nbytes = read(pipem[0],readbuffer,sizeof(readbuffer));
-            printf("Received String: %s ", readbuffer);
+            printf("Received String: %s ", nbytes);
             exit(0);
         } else {
             close(pipem[0]);
