@@ -164,3 +164,106 @@ Enjoy!
 
 
 
+Question1 : 
+
+ARG seed 0
+ARG address space size 128
+ARG phys mem size 512
+
+Segment register information:
+
+  Segment 0 base  (grows positive) : 0x00000000 (decimal 0)
+  Segment 0 limit                  : 20
+
+  Segment 1 base  (grows negative) : 0x00000200 (decimal 512)
+  Segment 1 limit                  : 20
+
+Virtual Address Trace
+  VA  0: 0x0000006c (decimal:  108) --> PA or segmentation violation? -> Segment 1 -> 492
+  VA  1: 0x00000061 (decimal:   97) --> PA or segmentation violation? -> violation
+  VA  2: 0x00000035 (decimal:   53) --> PA or segmentation violation? -> violation
+  VA  3: 0x00000021 (decimal:   33) --> PA or segmentation violation? -> violation
+  VA  4: 0x00000041 (decimal:   65) --> PA or segmentation violation? -> violation
+
+For each virtual address, either write down the physical address it translates to
+OR write down that it is an out-of-bounds address (a segmentation violation). For
+this problem, you should assume a simple address space with two segments: the top
+bit of the virtual address can thus be used to check whether the virtual address
+is in segment 0 (topbit=0) or segment 1 (topbit=1). Note that the base/limit pairs
+given to you grow in different directions, depending on the segment, i.e., segment 0
+grows in the positive direction, whereas segment 1 in the negative.
+
+ARG seed 1
+ARG address space size 128
+ARG phys mem size 512
+
+Segment register information:
+
+  Segment 0 base  (grows positive) : 0x00000000 (decimal 0)
+  Segment 0 limit                  : 20
+
+  Segment 1 base  (grows negative) : 0x00000200 (decimal 512)
+  Segment 1 limit                  : 20
+
+Virtual Address Trace
+  VA  0: 0x00000011 (decimal:   17) --> PA or segmentation violation? -> Segment 0 -> 17
+  VA  1: 0x0000006c (decimal:  108) --> PA or segmentation violation? -> Segment 1 -> 492
+  VA  2: 0x00000061 (decimal:   97) --> PA or segmentation violation? -> violation
+  VA  3: 0x00000020 (decimal:   32) --> PA or segmentation violation? -> violation
+  VA  4: 0x0000003f (decimal:   63) --> PA or segmentation violation? -> violation
+
+For each virtual address, either write down the physical address it translates to
+OR write down that it is an out-of-bounds address (a segmentation violation). For
+this problem, you should assume a simple address space with two segments: the top
+bit of the virtual address can thus be used to check whether the virtual address
+is in segment 0 (topbit=0) or segment 1 (topbit=1). Note that the base/limit pairs
+given to you grow in different directions, depending on the segment, i.e., segment 0
+grows in the positive direction, whereas segment 1 in the negative.
+
+ARG seed 2
+ARG address space size 128
+ARG phys mem size 512
+
+Segment register information:
+
+  Segment 0 base  (grows positive) : 0x00000000 (decimal 0)
+  Segment 0 limit                  : 20
+
+  Segment 1 base  (grows negative) : 0x00000200 (decimal 512)
+  Segment 1 limit                  : 20
+
+Virtual Address Trace
+  VA  0: 0x0000007a (decimal:  122) --> PA or segmentation violation? -> Segment 1 -> 506
+  VA  1: 0x00000079 (decimal:  121) --> PA or segmentation violation? -> Segment 1 -> 505
+  VA  2: 0x00000007 (decimal:    7) --> PA or segmentation violation? -> Segment 0 -> 7
+  VA  3: 0x0000000a (decimal:   10) --> PA or segmentation violation? -> Segment 0 -> 10
+  VA  4: 0x0000006a (decimal:  106) --> PA or segmentation violation? -> violation
+
+For each virtual address, either write down the physical address it translates to
+OR write down that it is an out-of-bounds address (a segmentation violation). For
+this problem, you should assume a simple address space with two segments: the top
+bit of the virtual address can thus be used to check whether the virtual address
+is in segment 0 (topbit=0) or segment 1 (topbit=1). Note that the base/limit pairs
+given to you grow in different directions, depending on the segment, i.e., segment 0
+grows in the positive direction, whereas segment 1 in the negative.
+
+
+Question 2:
+
+-Highest Legal virtual Address Segment 0: 19
+-Lowest Legal virtual Address Segment 1: 108
+-Highest Illegal Address: 107
+-Lowest Illegal Address: 20
+
+Question 3:
+./segmentation.py -a 16 -p 128 -A 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 -b 0 -l 2 -B 128 -L 2 -c
+
+Question 4:
+
+./segmentation.py -n 20 -A -1 -a 128 -p 256 -b 0 -l 60 -B 256 -L 60 -c
+-The limit of both Segments has to cover roughly 90 % of the space
+
+Question 5: 
+
+ ./segmentation.py -n 20 -A -1 -a 128 -p 256 -b 0 -l 0 -B 256 -L 0 -c => LIMIT = 0
+ 
