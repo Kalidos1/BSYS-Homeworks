@@ -153,10 +153,67 @@ Those are the basics. Use the questions from the book chapter to explore more,
 or create new and interesting questions yourself to better understand how
 allocators function.
 
+Question 1:
 
+ptr[0] = Alloc(3)  returned ? -> 1000
+List?  1. Size 1, addr: 1003 sz: 97
 
+Free(ptr[0]) returned ? 0
+List? 1. Size 2, addr: 1000 sz: 3, addr: 1003 sz: 97
 
+ptr[1] = Alloc(5)  returned 1003 
+List? 1. Size 2, addr: 1000 sz: 3, addr: 1008 sz: 92
 
-  
+Free(ptr[1]) returned ? 0
+List? Size 3, addr: 1000 sz: 3, addr: 1003 sz: 5,  addr: 1008 sz: 92
 
-  
+ptr[2] = Alloc(8)  returned ? 1008
+List? size3, addr: 1000 sz: 3, addr: 1003 sz: 5,  addr: 1016 sz: 84
+
+Free(ptr[2]) returned ? 0
+List? size 4, addr: 1000 sz: 3, addr: 1003 sz: 5,  addr: 1008 sz: 8, addr: 1016 sz:84
+
+ptr[3] = Alloc(8)  returned ?
+List?
+
+Free(ptr[3]) returned ?
+List?
+
+ptr[4] = Alloc(2)  returned ?
+List?
+
+ptr[5] = Alloc(7)  returned ?
+List?
+
+- Without the coalesce the free list gets relatively big but if there are no allocs that fit in the
+already free lists, but when the allocs fit then its doest get bigger
+
+Question 2:
+
+- WIth the -WORST flag the Free List Size is increasing, and also the time increases because it has
+to search more elements
+
+Question 3:
+
+- WIth the -First flag the Time it finds place to alloc decreases and it doesnt have to search that
+much elements
+
+Question 4:
+
+-FIRST and SIZESORT- is the Fastest but all the other dont really change in terms of searched elements
+
+Question 5: 
+
+-With 1000 allocations the Free List size gets really big, whereas with coalescing the List stays at 
+Max 10 Size 
+- The Ordering doesnt matter 
+
+Question 6:
+
+- As it nears 100 there is no room for the Allocs if the percentage is higher than 75 %
+-> they return -1
+- THe Free List increases in size if the percent of the allocs nears 0
+
+Question 7:
+
+-./malloc.py -A +30,+20,+15,+10,+10,+10,+5,-0,-1,-2,-3,-4,-5,-6 -c 
