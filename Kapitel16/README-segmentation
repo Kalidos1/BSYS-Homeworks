@@ -266,4 +266,8 @@ Question 4:
 Question 5: 
 
  ./segmentation.py -n 20 -A -1 -a 128 -p 256 -b 0 -l 0 -B 256 -L 0 -c => LIMIT = 0
+
+
+Segment 0 = (Offset + Base) + VADecimal
+Segment 1 = (Base - (Addres Space - VADecimal))
  
