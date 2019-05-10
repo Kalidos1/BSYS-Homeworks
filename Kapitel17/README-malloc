@@ -200,13 +200,13 @@ much elements
 
 Question 4:
 
--FIRST and SIZESORT- is the Fastest but all the other dont really change in terms of searched elements
+-FIRST and SIZESORT- is the Fastest ADDRSOrt is the same, Sizesort+ and Sizesort- are worse in terms of coalescingADDRSOrt is the same, Sizesort+ and Sizesort- are worse in terms of coalescing
 
 Question 5: 
 
 -With 1000 allocations the Free List size gets really big, whereas with coalescing the List stays at 
 Max 10 Size 
-- The Ordering doesnt matter 
+ADDRSOrt is the same, Sizesort+ and Sizesort- are worse in terms of coalescing
 
 Question 6:
 

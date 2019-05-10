@@ -128,4 +128,27 @@ problems. Run the program with the -h flag to see what options there are:
 - The -v flag prints out the VPN numbers to make your life easier.
 
 
+ARG address space size 16k => 2^14 => 14 Stellen
+ARG page size 1k => 2^10 => 10 Stellen
+=> 10 Stellen Offset + 4 Stellen VPN = 14 Stellen
+
+Question 1:
+
+1) Verdoppelt sich wenn addres space erhöht wird
+2) Halbiert sich wenn page size erhöht wird
+-> Address Space und Page Size hängen voneinander ab
+3) Mehr Pages -> Mehr Rechenpower wird beansprucht 
+
+Question 2:
+
+1) More Entries are Valid the higher the percentage
+
+Question 3:
+
+1) ??
+2) ?? 
+
+Question 4:
+
+1) Error: physical memory size must be GREATER than address space size (for this simulation)
 
