@@ -69,3 +69,73 @@ for a given memory dump.
 
 Use -c (or --solve) to show the solutions.
 
+1) 6c74:  PDBR: 17
+
+11011 00011 10100
+
+PDE: 
+11011 = Stelle 27 auf Page 17 
+a0
+
+1 0100000
+
+Page: 32
+
+PFN: 
+00011 = Stelle 3 auf Page 32
+e1
+
+1 1100001
+
+Page: 97
+10100 = Stelle 20 auf Page 97
+Physical Value = 06
+1100001 + 10100 = 1100 0011 0100
+
+2) 7570:  PDBR: 122
+
+11101 01011 10000
+
+PDE:
+11101 = Stelle 29 auf Page 122
+b3
+1 0110011
+
+Page: 51
+PFN: 
+
+01011 = Stelle 11 auf Page 51
+7f Valid 0 
+
+3) 7268  PDBR: 122
+
+11100 10011 01000
+
+PDE:
+11100 = Stelle 28 auf page 122
+de
+1 1011110
+
+page 94
+
+PFN: 
+10011 = Stelle 19 auf Page 94
+e5
+1 1100101
+
+Page : 101
+01000 = Stelle 8 auf Page 101
+Physical Value = 16
+1100101 + 01000 = CA8
+
+
+Question 1: 
+
+
+
+Question 2:
+
+Each lookup needs 3 Memory References
+
+Question 3:
+

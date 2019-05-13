@@ -79,4 +79,83 @@ happening with the system. Read the vmstat man page (type "man vmstat") for
 details on how it works, and what each column of output means.
 
 
+Question 1:
 
+1) The US (tune spent running in non-kernel mode) geht von 0 zu 50
+und die ID (time spent idle) verändert sich zu 50 von 80-100 
+2) Macht Sinn da wir ein Programm ausführen und das nur den non-kernel beansprucht
+3) VErändert sich nicht wenn mehrere Instanzen ausgeführt werden (Bleibt bei 50)
+
+ 5  0 506768 1281236      0 261592    0    0   540   100 4657 5636 22  0 78  0  0
+ 1  0 506768 1281204      0 261624    0    0     0    40 3356 4274 29  0 71  0  0
+ 4  0 506768 1271028      0 261624    0    0     0   100 2476 4995 39  0 61  0  0
+ 3  0 506768 1281308      0 261624    0    0     0   112 3354 4215 37  0 63  0  0
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 2  0 506768 1281120      0 261624    0    0     0    76 2437 3856 29  0 71  0  0
+ 8  0 506768 1277420      0 261624    0    0     0    72 2766 3728 42  0 58  0  0
+ 3  0 506768 1280012      0 261624    0    0     0    36 3171 3760 50  0 50  0  0
+ 5  0 506768 1280084      0 261624    0    0     0   144 2642 3609 50  0 50  0  0
+
+
+Question 2:
+
+1) Die SWPD (amount of virtual memory used) bleibt gleich
+Der unbenutze Speicher "Free (amount of idle memory)" geht runter wenn man das Programm startet und geht
+wieder zurück wenn man das Programm beendet
+2) "Free" ändert sich sofort auf die ursprüngliche Menge zurück
+ 3  0 506024 223224      0 262156    0    0     0   156 2661 3677 42  0 58  0  0
+ 4  0 506024 223288      0 262156    0    0     0     8 2845 3673 28  0 72  0  0
+ 1  0 506024 1263812      0 262156    0    0     0    28 2582 3327 21  0 79  0  0
+ 1  0 506024 1274224      0 262156    0    0     0   108 2496 3356 10  0 90  0  0
+3) Es geht wieder auf den alten Wert zurück
+
+Question 3:
+
+1) Mit ./mem 1850 fängt es an zu Swappen
+2) Der erste Loop dauert immer länger als die anderen Loops die darauf folgen
+3) 
+ 5  1 874932    120      0  34496    4 6404    80  6596 3416 3475 35  0 65  0  0
+ 1  0 876612  21512      0  34392   20 1240   128  1276 3208 3410 28  0 72  0  0
+4)
+
+Question 4:
+
+1) Die I/O Statistics steigen auch wenn die SWAP steigen und die ID bleibt die ganze Zeit bei ca. 100
+
+Question 5:
+
+1) Loop 0 Geht Lange, Danach Schnell
+loop 0 in 957.89 ms (bandwidth: 1043.96 MB/s)
+loop 1 in 408.55 ms (bandwidth: 2447.71 MB/s)
+loop 2 in 432.06 ms (bandwidth: 2314.49 MB/s)
+loop 3 in 333.90 ms (bandwidth: 2994.88 MB/s)
+loop 4 in 816.42 ms (bandwidth: 1224.87 MB/s)
+loop 5 in 1012.11 ms (bandwidth: 988.04 MB/s)
+loop 6 in 400.26 ms (bandwidth: 2498.37 MB/s)
+loop 7 in 360.41 ms (bandwidth: 2774.59 MB/s)
+loop 8 in 328.18 ms (bandwidth: 3047.12 MB/s)
+loop 9 in 335.47 ms (bandwidth: 2980.87 MB/s)
+loop 10 in 320.51 ms (bandwidth: 3120.04 MB/s)
+loop 11 in 317.74 ms (bandwidth: 3147.21 MB/s)
+loop 12 in 319.54 ms (bandwidth: 3129.53 MB/s)
+loop 13 in 323.69 ms (bandwidth: 3089.36 MB/s)
+loop 14 in 347.51 ms (bandwidth: 2877.58 MB/s)
+loop 15 in 337.72 ms (bandwidth: 2961.01 MB/s)
+
+2) Loop 0 geht sehr lange und die danach noch Länger
+loop 0 in 46297.30 ms (bandwidth: 64.80 MB/s)
+loop 1 in 236187.63 ms (bandwidth: 12.70 MB/s)
+
+3) Bandwith ist beim ersten viel Schneller als beim zweiten Versuch
+
+4) Die Performance ist viel schlechter beim Swappin als wenn alles in Speicher passt
+
+5) Je Größer mem desto kleine Bandwith und anders herum
+
+6) Wenn alles in Speicher passt braucht die erste Loop am längsten und die darauffolgenden wieder kurz.
+Beim Swapping brauch die erste Loop am kürzesten und die anderen brauchen immer länger
+
+Question 6:
+
+Wenn die Size des Swapped überschritten wird, wird das Programm gekillt

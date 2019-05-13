@@ -117,3 +117,124 @@ the simulator is generating references for you; and "-f/--addressfile" which
 lets you specify a file with addresses in them, in case you wish to get traces
 from a real application or otherwise use a long trace as input.
 
+
+Question 1:
+
+Access: 8  Hit/Miss?  State of Memory? MISS 8
+Access: 7  Hit/Miss?  State of Memory? MISS 8,7
+Access: 4  Hit/Miss?  State of Memory? MISS 8,7,4
+Access: 2  Hit/Miss?  State of Memory? MISS 7,4,2
+Access: 5  Hit/Miss?  State of Memory? MISS 4,2,5
+Access: 4  Hit/Miss?  State of Memory? HIT 4,2,5
+Access: 7  Hit/Miss?  State of Memory? MISS 2,5,7
+Access: 3  Hit/Miss?  State of Memory? MISS 5,7,3
+Access: 4  Hit/Miss?  State of Memory? MISS 7,3,4
+Access: 5  Hit/Miss?  State of Memory? MISS 3,4,5
+
+1 Hit 9 Miss 10%
+
+Access: 8  Hit/Miss?  State of Memory? MISS 8
+Access: 7  Hit/Miss?  State of Memory? MISS 8,7
+Access: 4  Hit/Miss?  State of Memory? MISS 8,7,4
+Access: 2  Hit/Miss?  State of Memory? MISS 7,4,2
+Access: 5  Hit/Miss?  State of Memory? MISS 4,2,5
+Access: 4  Hit/Miss?  State of Memory? HIT 2,5,4
+Access: 7  Hit/Miss?  State of Memory? MISS 5,4,7
+Access: 3  Hit/Miss?  State of Memory? MISS 4,7,3
+Access: 4  Hit/Miss?  State of Memory? HIT 7,3,4
+Access: 5  Hit/Miss?  State of Memory? MISS 3,4,5
+
+2 Hit 8 Miss 10%
+
+Access: 8  Hit/Miss?  State of Memory? MISS 8
+Access: 7  Hit/Miss?  State of Memory? MISS 8,7
+Access: 4  Hit/Miss?  State of Memory? MISS 8,7,4
+Access: 2  Hit/Miss?  State of Memory? MISS 7,4,2
+Access: 5  Hit/Miss?  State of Memory? MISS 7,4,5
+Access: 4  Hit/Miss?  State of Memory? HIT 7,4,5
+Access: 7  Hit/Miss?  State of Memory? HIT 7,4,5
+Access: 3  Hit/Miss?  State of Memory? MISS 4,5,3
+Access: 4  Hit/Miss?  State of Memory? HIT 4,5,3
+Access: 5  Hit/Miss?  State of Memory? HIT 4,5,3
+
+4 Hit 6 Miss 40 %
+
+Access: 1  Hit/Miss?  State of Memory? MISS 1
+Access: 8  Hit/Miss?  State of Memory? MISS 1,8
+Access: 7  Hit/Miss?  State of Memory? MISS 1,8,7
+Access: 2  Hit/Miss?  State of Memory? MISS 8,7,2
+Access: 4  Hit/Miss?  State of Memory? MISS 7,2,4
+Access: 4  Hit/Miss?  State of Memory? HIT 7,2,4
+Access: 6  Hit/Miss?  State of Memory? MISS 2,4,6
+Access: 7  Hit/Miss?  State of Memory? MISS 4,6,7
+Access: 0  Hit/Miss?  State of Memory? MISS 6,7,0
+Access: 0  Hit/Miss?  State of Memory? HIT 6,7,0
+
+Access: 1  Hit/Miss?  State of Memory? MISS 1
+Access: 8  Hit/Miss?  State of Memory? MISS 1,8
+Access: 7  Hit/Miss?  State of Memory? MISS 1,8,7
+Access: 2  Hit/Miss?  State of Memory? MISS 8,7,2
+Access: 4  Hit/Miss?  State of Memory? MISS 7,2,4
+Access: 4  Hit/Miss?  State of Memory? HIT 7,2,4
+Access: 6  Hit/Miss?  State of Memory? MISS 2,4,6
+Access: 7  Hit/Miss?  State of Memory? MISS 4,6,7
+Access: 0  Hit/Miss?  State of Memory? MISS 6,7,0
+Access: 0  Hit/Miss?  State of Memory? HIT 6,7,0
+
+Access: 1  Hit/Miss?  State of Memory? MISS 1
+Access: 8  Hit/Miss?  State of Memory? MISS 1,8
+Access: 7  Hit/Miss?  State of Memory? MISS 1,8,7
+Access: 2  Hit/Miss?  State of Memory? MISS 1,7,2
+Access: 4  Hit/Miss?  State of Memory? MISS 1,7,4
+Access: 4  Hit/Miss?  State of Memory? HIT 1,7,4
+Access: 6  Hit/Miss?  State of Memory? MISS 1,7,6
+Access: 7  Hit/Miss?  State of Memory? HIT 1,7,6
+Access: 0  Hit/Miss?  State of Memory? MISS 1,7,0
+Access: 0  Hit/Miss?  State of Memory? HIT 1,7,0
+
+Access: 9  Hit/Miss?  State of Memory? MISS 9
+Access: 9  Hit/Miss?  State of Memory? HIT 9
+Access: 0  Hit/Miss?  State of Memory? MISS 9,0
+Access: 0  Hit/Miss?  State of Memory? HIT 9,0
+Access: 8  Hit/Miss?  State of Memory? MISS 9,0,8
+Access: 7  Hit/Miss?  State of Memory? MISS 0,8,7
+Access: 6  Hit/Miss?  State of Memory? MISS 8,7,6
+Access: 3  Hit/Miss?  State of Memory? MISS 7,6,3
+Access: 6  Hit/Miss?  State of Memory? HIT 
+Access: 6  Hit/Miss?  State of Memory? HIT 
+
+Access: 9  Hit/Miss?  State of Memory? MISS 9
+Access: 9  Hit/Miss?  State of Memory? HIT 9
+Access: 0  Hit/Miss?  State of Memory? MISS 9,0
+Access: 0  Hit/Miss?  State of Memory? HIT
+Access: 8  Hit/Miss?  State of Memory? MISS 9,0,8
+Access: 7  Hit/Miss?  State of Memory? MISS 0,8,7
+Access: 6  Hit/Miss?  State of Memory? MISS
+Access: 3  Hit/Miss?  State of Memory?
+Access: 6  Hit/Miss?  State of Memory?
+Access: 6  Hit/Miss?  State of Memory?
+
+Question2: ??
+
+Access: 1  MISS FirstIn ->          [1] <- Lastin  Replaced:- [Hits:0 Misses:1]
+Access: 3  MISS FirstIn ->       [1, 3] <- Lastin  Replaced:- [Hits:0 Misses:2]
+Access: 2  MISS FirstIn ->    [1, 3, 2] <- Lastin  Replaced:- [Hits:0 Misses:3]
+Access: 4  MISS FirstIn -> [1, 3, 2, 4] <- Lastin  Replaced:- [Hits:0 Misses:4]
+Access: 5  MISS FirstIn -> [1, 3, 2, 4, 5] <- Lastin  Replaced:- [Hits:0 Misses:5]
+Access: 9  MISS FirstIn -> [3, 2, 4, 5, 9] <- Lastin  Replaced:1 [Hits:0 Misses:6]
+Access: 8  MISS FirstIn -> [2, 4, 5, 9, 8] <- Lastin  Replaced:3 [Hits:0 Misses:7]
+Access: 7  MISS FirstIn -> [4, 5, 9, 8, 7] <- Lastin  Replaced:2 [Hits:0 Misses:8]
+Access: 6  MISS FirstIn -> [5, 9, 8, 7, 6] <- Lastin  Replaced:4 [Hits:0 Misses:9]
+Access: 2  MISS FirstIn -> [9, 8, 7, 6, 2] <- Lastin  Replaced:5 [Hits:0 Misses:10]
+Access: 1  MISS FirstIn -> [8, 7, 6, 2, 1] <- Lastin  Replaced:9 [Hits:0 Misses:11]
+Access: 3  MISS FirstIn -> [7, 6, 2, 1, 3] <- Lastin  Replaced:8 [Hits:0 Misses:12]
+Access: 4  MISS FirstIn -> [6, 2, 1, 3, 4] <- Lastin  Replaced:7 [Hits:0 Misses:13]
+Access: 5  MISS FirstIn -> [2, 1, 3, 4, 5] <- Lastin  Replaced:6 [Hits:0 Misses:14]
+
+FINALSTATS hits 0   misses 14   hitrate 0.00
+
+7 bis 8 CacheSize
+
+
+
+
