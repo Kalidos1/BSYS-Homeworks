@@ -38,5 +38,71 @@ Then, you have a few different C programs to look at:
 With these programs, you can now answer the questions in the textbook.
 
 
+Question 1:
+
+1)==31794== Possible data race during write of size 4 at 0x30A07C by thread #1
+==31794== Locks held: none
+==31794==    at 0x108D0C: main (main-race.c:15)
+==31794== 
+==31794== This conflicts with a previous write of size 4 by thread #2
+==31794== Locks held: none
+==31794==    at 0x108CCA: worker (main-race.c:8)
+
+Richtige Zeilen bei "balance++" => Race Condition
+
+2) Informationen zum erstellten 2. Threat
+Bei Fehler die Root vom Problem und bei welchem Threat
+
+Question 2:
+
+1) Keine Errors egal welche Line man removed
+2) Wenn man ein Lock um einen der Beiden Zeilen macht treten Error auf
+Wenn beide gelockt sind treten keine Error auf
+
+Question 3:
+
+1) 2 Locks Hintereinander könnten das Problem hervorrufen
+Join könnte auch ein Problem sein, da der eine Thread auf den anderen Wartet, aber ein anderer Thread gelockt ist und dieser nicht weiterläuft
+somit läuft garnichts weiter
+
+Question 4:
+
+1) ==4283== Observed (incorrect) order is: acquisition of lock at 0x30A0E0
+...
+==4283==  followed by a later acquisition of lock at 0x30A0A0
+
+==4283== Required order was established by acquisition of lock at 0x30A0A0
+...
+==4283==  followed by a later acquisition of lock at 0x30A0E0
+
+Question 5: ?
+
+1)Hat das selbe problem nur das noch ein Lock mehr aufgerufen wird. Also anstatt 2 Order Fehler 3
+2) Hellgrind zeigt dies nicht an sondern gibt nur den selben Fehler wie bei Aufgabe 3
+3) Hellgrind zeigt bei bestimmten Situationen nicht alle Error
+
+Question 6:
+
+1) Der Parent schaut die ganze Zeit ob der Child Process fertig ist(nötige Anforderungen hat)
+und cyclet die ganze Zeit durch den CPU
+
+Question 7:
+
+1) ==12071== Possible data race during read of size 4 at 0x30A084 by thread #1
+Possible Data Race bei Zeile 16 mit der While Schleife und Zeile 9 bei dem Thread
+
+2) Code sollte Korrekt sein
+
+Question 8:
+
+1) Der Code ist zwar länger verschwendet keine CPU Cycles indem Condition Variables benutzt werden (Sleep,Wait usw.)
+2) Müsste in Correctness und Performance besser sein
+
+Question 9:
+
+1) Hellgrind zeigt keine Error
+
+
+
 
 
