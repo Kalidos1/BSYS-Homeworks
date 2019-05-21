@@ -349,3 +349,99 @@ as specified by -i), which can make for more fun during homework problems.
 Now you have the basics in place; read the questions at the end of the chapter
 to study this race condition and related issues in more depth.
 
+
+Question 1:
+
+1) Yes
+
+Question 2:
+
+ flag      ax    bx          Thread 0                Thread 1         
+
+    0       0     0   
+    0       0     0   1000 mov  flag, %ax
+    0       0     0   1001 test $0, %ax
+    0       0     0   1002 jne  .acquire
+    1       0     0   1003 mov  $1, flag
+    1       0     0   1004 mov  count, %ax
+    1       1     0   1005 add  $1, %ax
+    1       1     0   1006 mov  %ax, count
+    0       1     0   1007 mov  $0, flag
+    0       1    -1   1008 sub  $1, %bx
+    0       1    -1   1009 test $0, %bx
+    0       1    -1   1010 jgt .top
+    0       1    -1   1011 halt
+    0       0     0   ----- Halt;Switch -----  ----- Halt;Switch -----  
+    0       0     0                            1000 mov  flag, %ax
+    0       0     0                            1001 test $0, %ax
+    0       0     0                            1002 jne  .acquire
+    1       0     0                            1003 mov  $1, flag
+    1       1     0                            1004 mov  count, %ax
+    1       2     0                            1005 add  $1, %ax
+    1       2     0                            1006 mov  %ax, count
+    0       2     0                            1007 mov  $0, flag
+    0       2    -1                            1008 sub  $1, %bx
+    0       2    -1                            1009 test $0, %bx
+    0       2    -1                            1010 jgt .top
+    0       2    -1                            1011 halt
+
+Question 3:
+
+1) Es ändert sich nichts außer dass es 2x ausgeführt wird
+2) Nichts ändert sich außer das wir bis 4 zählen, Flag bleibt gleich 
+
+Question 4:
+
+1) Fast alle Werte führen zu einem Schlechten Ergebnis, es funktioniert immer bei dem Interrupt Intervall
+das nicht die Critical Section verhindert und flag unterbrochen wird (11,15,22,33 etc gehen)
+
+Question 5:
+
+1) Lock wird durch den "atomic swap " garantiert, da mutex auf #1 gesetzt wird
+2) Mutex wird bei dem release wieder auf 0 gesetzt, was dann wieder geswappt wird
+
+Question 6:
+
+1) Durch das Lock kommt man immer auf das Richtige Ergebnis egal welcher Interrupt Timer
+2) Je kleiner der Interrupt Timer wird desto weniger effizient wird der CPU benutzt
+3) Der eine Thread wartet auf den anderen und dabei wird immer gemoved und vergleicht
+
+Question 7:
+
+1) Es passiert das was in der Aufgabe steht (11000)
+2) ?Maybe Deadlock
+
+Question 8:
+
+??
+
+Question 9:
+
+??
+
+Question 10:
+
+??
+
+Question 11:
+
+1) Der Code ist ungefähr der gleiche wie im Buch
+2) Die Threads verschwenden relativ viel Zeit beim spin-waiting für den Lock
+
+Question 12:
+
+1) Mit mehreren Threads ändert sich nichts  
+
+Question 13:
+
+1) Ca. 45 * Interuppts 
+2) Bei großen Intervallen wird viel gesaved da er nach yield interuppted und den anderen Thread weiterführt
+
+Question 14:
+
+1) Es wird ein 2. Test vor dem eigentlichen Test hinzugefügt, der Mutex prüft ob es frei ist bevor er anfängt Mutex zu swappen
+2) Es muss nicht immer in den Atomic Swap reingehen und saved somit pro Mutex aufruf diesen Teil
+
+
+
+
