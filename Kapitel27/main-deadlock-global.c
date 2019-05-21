@@ -7,7 +7,7 @@ pthread_mutex_t m1 = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t m2 = PTHREAD_MUTEX_INITIALIZER;
 
 void* worker(void* arg) {
-    Pthread_mutex_lock(&g);
+  Pthread_mutex_lock(&g);
     if ((long long) arg == 0) {
 	Pthread_mutex_lock(&m1);
 	Pthread_mutex_lock(&m2);

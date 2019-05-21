@@ -2,17 +2,26 @@
 
 #include "mythreads.h"
 
+
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+int pthread_mutex_unlock(pthread_mutex_t *mutex);
+
 int balance = 0;
+pthread_mutex_t lock;
 
 void* worker(void* arg) {
-    balance++; // unprotected access 
+    pthread_mutex_lock(&lock);
+    balance++; // unprotected access
+    pthread_mutex_unlock(&lock);
     return NULL;
 }
 
 int main(int argc, char *argv[]) {
     pthread_t p;
     Pthread_create(&p, NULL, worker, NULL);
+    pthread_mutex_lock(&lock);
     balance++; // unprotected access
+    pthread_mutex_unlock(&lock);
     Pthread_join(p, NULL);
     return 0;
 }

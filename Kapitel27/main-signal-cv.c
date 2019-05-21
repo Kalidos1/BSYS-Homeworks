@@ -2,14 +2,14 @@
 
 #include "mythreads.h"
 
-// 
+//
 // simple synchronizer: allows one thread to wait for another
 // structure "synchronizer_t" has all the needed data
 // methods are:
 //   init (called by one thread)
 //   wait (to wait for a thread)
 //   done (to indicate thread is done)
-// 
+//
 typedef struct __synchronizer_t {
     pthread_mutex_t lock;
     pthread_cond_t cond;

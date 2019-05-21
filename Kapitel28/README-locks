@@ -387,12 +387,12 @@ Question 2:
 
 Question 3:
 
-1) Es ändert sich nichts außer dass es 2x ausgeführt wird
-2) Nichts ändert sich außer das wir bis 4 zählen, Flag bleibt gleich 
+1) Es ï¿½ndert sich nichts auï¿½er dass es 2x ausgefï¿½hrt wird
+2) Nichts ï¿½ndert sich auï¿½er das wir bis 4 zï¿½hlen, Flag bleibt gleich 
 
 Question 4:
 
-1) Fast alle Werte führen zu einem Schlechten Ergebnis, es funktioniert immer bei dem Interrupt Intervall
+1) Fast alle Werte fï¿½hren zu einem Schlechten Ergebnis, es funktioniert immer bei dem Interrupt Intervall
 das nicht die Critical Section verhindert und flag unterbrochen wird (11,15,22,33 etc gehen)
 
 Question 5:
@@ -413,11 +413,12 @@ Question 7:
 
 Question 8:
 
-??
+So ein bisschen 
 
 Question 9:
 
-??
+Ca. Das Selbe, jedoch wird bei der Lock-While Schleife nicht das "&&" beachtet
+Der Assembler springt nach der ersten Bedingung schon nach unten
 
 Question 10:
 
@@ -425,21 +426,21 @@ Question 10:
 
 Question 11:
 
-1) Der Code ist ungefähr der gleiche wie im Buch
-2) Die Threads verschwenden relativ viel Zeit beim spin-waiting für den Lock
+1) Der Code ist ungefï¿½hr der gleiche wie im Buch
+2) Die Threads verschwenden relativ viel Zeit beim spin-waiting fï¿½r den Lock
 
 Question 12:
 
-1) Mit mehreren Threads ändert sich nichts  
+1) Mit mehreren Threads ï¿½ndert sich nichts  
 
 Question 13:
 
 1) Ca. 45 * Interuppts 
-2) Bei großen Intervallen wird viel gesaved da er nach yield interuppted und den anderen Thread weiterführt
+2) Bei groï¿½en Intervallen wird viel gesaved da er nach yield interuppted und den anderen Thread weiterfï¿½hrt
 
 Question 14:
 
-1) Es wird ein 2. Test vor dem eigentlichen Test hinzugefügt, der Mutex prüft ob es frei ist bevor er anfängt Mutex zu swappen
+1) Es wird ein 2. Test vor dem eigentlichen Test hinzugefï¿½gt, der Mutex prï¿½ft ob es frei ist bevor er anfï¿½ngt Mutex zu swappen
 2) Es muss nicht immer in den Atomic Swap reingehen und saved somit pro Mutex aufruf diesen Teil
 
 
