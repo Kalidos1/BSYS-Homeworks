@@ -1,13 +1,16 @@
 
 FLAGS = -Wall -pthread -g
 
-all: main-race main-deadlock main-deadlock-global main-signal main-signal-cv
+all: q1 main-race main-deadlock main-deadlock-global main-signal main-signal-cv
 
 clean:
 	rm -f main-race main-deadlock main-deadlock-global main-signal main-signal-cv
 
 main-race: main-race.c mythreads.h
 	gcc -o main-race main-race.c $(FLAGS)
+
+q1: q1.c mythreads.h
+	gcc -o q1 q1.c $(FLAGS)
 
 main-deadlock: main-deadlock.c mythreads.h
 	gcc -o main-deadlock main-deadlock.c $(FLAGS)
@@ -20,4 +23,3 @@ main-signal: main-signal.c mythreads.h
 
 main-signal-cv: main-signal-cv.c mythreads.h
 	gcc -o main-signal-cv main-signal-cv.c $(FLAGS)
-
