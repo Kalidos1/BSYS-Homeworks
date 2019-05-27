@@ -210,4 +210,47 @@ consumer. Thus, if you create two producers and three consumers (with -p 2 -c
 0,1,2:0:3,3,3,1,1,1). Sleep strings can be shorter than the number of sleep
 points in the code; the remaining sleep slots are initialized to be zero.
 
+Question 1: 
 
+1) Die Producer füllen mit "do_fill" den buffer und die consumer nehmen mit "do_get" diese Werte wieder um sie zu verwerten
+
+Question 2:
+
+1) Das Verhalten ändert sich mit größerer Buffer Größe nicht
+2) NUM_FULL = 1, weil sich nichts ändert
+3) siehe 2)
+4) NUM_FULL = MAX, da der Consumer Sleept
+
+Question 4:
+
+1) Ca. 11 Sekunden
+
+Question 5:
+
+1) Es braucht genau solange mit -m 3(BufferSize) wie mit -m 1
+
+Question 6:
+
+1) Es braucht halb so viel wie davor, wenn es bei C6 Sleept
+
+Question 7:
+
+1) Es braucht genau solange mit -m 3(BufferSize) wie mit -m 1
+
+Question 8:
+
+1) Mit nur einem Consumer kann man kein Problem darstellen, nur den Process Verlängern
+
+Question 9:
+
+1) ./main-one-cv-while -p 1 -c 2 -m 1 -P 0,0,0,0,0,0,1 -C 0,0,1,0,0,0,0:0,0,1,0,0,0,0 -l 5 -v -t
+ 	=> Dauerschleife
+
+Question 10:
+
+1) 1 Consumer gibt keine Probleme
+2) error: tried to get an empty buffer => ./main-two-cvs-if -p 1 -c 2 -m 1 -C 0,0,1,0,0,0,0:0,0,1,0,0,0,0 -l 5 -v -t
+
+Question 11:
+
+1) ??
