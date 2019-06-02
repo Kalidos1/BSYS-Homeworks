@@ -223,7 +223,7 @@ Question 2:
 
 Question 4:
 
-1) Ca. 11 Sekunden
+1) 11.01 Sekunden
 
 Question 5:
 
@@ -231,20 +231,20 @@ Question 5:
 
 Question 6:
 
-1) Es braucht halb so viel wie davor, wenn es bei C6 Sleept
+1) Es braucht ca. halb so viel wie davor, wenn es bei C6 Sleept (5.01 Sekunden)
 
 Question 7:
 
 1) Es braucht genau solange mit -m 3(BufferSize) wie mit -m 1
 
-Question 8:
+Question 8:?
 
 1) Mit nur einem Consumer kann man kein Problem darstellen, nur den Process Verlängern
 
 Question 9:
 
 1) ./main-one-cv-while -p 1 -c 2 -m 1 -P 0,0,0,0,0,0,1 -C 0,0,1,0,0,0,0:0,0,1,0,0,0,0 -l 5 -v -t
- 	=> Dauerschleife
+ 	=> Deadlock
 
 Question 10:
 
@@ -254,3 +254,6 @@ Question 10:
 Question 11:
 
 1) ??
+
+
+-------Für die prüfung den B-Treee machen (Kapitel-29)

@@ -27,12 +27,12 @@ Programm Finished
 2) cat /proc/cpuinfo | grep processor | wc -l
 =>  4 CPU's
 
-3) Ja, wenn mehr als 4 Threads laufen würden
+3) Ja, wenn weniger CPUS als Threads frei sind 
 
 Question 3:
 
-1) Die Threads blieben bei gleicehr länge,
-wenn man jedoch den Threshhold höher geht es deutlich schneller
+1) Die Threads blieben bei gleicher länge,
+wenn man jedoch den Threshhold höher schraubt, geht es deutlich schneller
 2) Die Zahlen sind ungefähr gleich wie im Kapitel 
 
 Question 4:
@@ -40,6 +40,12 @@ Question 4:
 1) Bei größeren Liste, bei denen man durch iteriert,  braucht es exponentiell mehr 
 2) Mehrere Threads haben gleichzeitig zugriff auf die Liste, aber nicht auf die einzelnen Nodes, d.h. sie können
 schonmal durch iterieren bis sie sich gegenseitig blockieren.
+
+Question 5:
+??
+
+Question 6:
+??
 
 
 
