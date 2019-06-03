@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-#include "common_threads.h"
+#include <pthread.h>
+#include "mythreads.h"
+#include "zemaphore.h"
 
 // If done correctly, each child should print their "before" message
 // before either prints their "after" message. Test by adding sleep(1)
@@ -13,7 +14,8 @@
 // other integers to track things.
 
 typedef struct __barrier_t {
-    // add semaphores and other information here
+    Zem_t s1,s2;
+    int counter;
 } barrier_t;
 
 
@@ -21,11 +23,21 @@ typedef struct __barrier_t {
 barrier_t b;
 
 void barrier_init(barrier_t *b, int num_threads) {
-    // initialization code goes here
+    Zem_init(&b->s1,num_threads);
+    Zem_init(&b->s2,0);
+    b->counter = num_threads;
 }
 
 void barrier(barrier_t *b) {
-    // barrier code goes here
+    Zem_wait(&b->s1);
+    b->counter--;
+    if (b->counter == 0) {
+      Zem_post(&b->s1);
+      Zem_post(&b->s2);
+    }
+    Zem_wait(&b->s2);
+    Zem_post(&b->s2);
+
 }
 
 //
@@ -44,7 +56,7 @@ void *child(void *arg) {
 }
 
 
-// run with a single argument indicating the number of 
+// run with a single argument indicating the number of
 // threads you wish to create (1 or more)
 int main(int argc, char *argv[]) {
     assert(argc == 2);
@@ -56,17 +68,16 @@ int main(int argc, char *argv[]) {
 
     printf("parent: begin\n");
     barrier_init(&b, num_threads);
-    
+
     int i;
     for (i = 0; i < num_threads; i++) {
 	t[i].thread_id = i;
 	Pthread_create(&p[i], NULL, child, &t[i]);
     }
 
-    for (i = 0; i < num_threads; i++) 
+    for (i = 0; i < num_threads; i++)
 	Pthread_join(p[i], NULL);
 
     printf("parent: end\n");
     return 0;
 }
-

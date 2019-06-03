@@ -8,27 +8,51 @@
 //
 
 typedef struct __rwlock_t {
+    Zem_t lock;
+    Zem_t writelock;
+    int   readers;
 } rwlock_t;
 
 
 void rwlock_init(rwlock_t *rw) {
+    rw->readers = 0;
+    Zem_init(&rw->lock,1);
+    Zem_init(&rw->writelock,1);
 }
 
 void rwlock_acquire_readlock(rwlock_t *rw) {
+  //Hier locken
+  Zem_wait(&rw->lock);
+  rw->readers++;
+  if (rw->readers == 1) {
+      Zem_wait(&rw->writelock);
+  }
+  Zem_post(&rw->lock);
 }
 
 void rwlock_release_readlock(rwlock_t *rw) {
+    Zem_wait(&rw->lock);
+    rw->readers--;
+    if (rw->readers == 0) {
+        Zem_post(&rw->writelock);
+    }
+    Zem_post(&rw->lock);
 }
 
 void rwlock_acquire_writelock(rwlock_t *rw) {
+    //Lock von oben erstellt
+    Zem_wait(&rw->writelock);
 }
 
 void rwlock_release_writelock(rwlock_t *rw) {
+    //Release von Lock
+    Zem_post(&rw->writelock);
 }
+
 
 //
 // Don't change the code below (just use it!)
-// 
+//
 
 int loops;
 int value = 0;
@@ -83,4 +107,3 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
-

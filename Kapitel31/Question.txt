@@ -1,0 +1,17 @@
+Question 1:
+1) Siehe fork-join.c
+
+Question 2:
+1) Siehe rendezvous.c
+
+Question 3:
+1) Siehe barrier.c
+
+Question 4:
+1) Wenn nur Reader ausgeführt wird
+
+Question 5:
+
+Question 6:
+
+Question 7:
