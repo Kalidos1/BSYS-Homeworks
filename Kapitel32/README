@@ -2,7 +2,7 @@
 This homework lets you play around with a number of ways to implement a small,
 deadlock-free vector object in C. The vector object is quite limited (e.g., it
 only has add() and init() functions) but is just used to illustrate different
-approaches to avoiding deadlock. 
+approaches to avoiding deadlock.
 
 Some files that you should pay attention to are as follows. They, in
 particular, are used by all the variants in this homework.
@@ -27,7 +27,7 @@ The variants of this homework are found in the following files. Each takes a
 different approach to dealing with concurrency inside a "vector addition"
 routine called vector_add(); examine the code in these files to get a sense of
 what is going on. They all use the files above to make a complete runnable
-program. 
+program.
 
 - vector-deadlock.c
   This version blithely grabs the locks in a particular order (dst then
@@ -37,7 +37,7 @@ program.
 
 - vector-global-order.c
   This version of vector_add() grabs the locks in a total order, based on
-  address of the vector. 
+  address of the vector.
 
 - vector-try-wait.c
   This version of vector_add() uses pthread_mutex_trylock() to attempt to grab
@@ -53,7 +53,7 @@ program.
   atomic fetch-and-add to implement the vector_add() routine. Its semantics
   (as a result) are slightly different.
 
-Type "make" (and read the Makefile) to build each of five executables. 
+Type "make" (and read the Makefile) to build each of five executables.
 
   prompt> make
 
@@ -63,10 +63,10 @@ Then you can run a program by simply typing its name:
 
 Each program takes the same set of arguments (see main-common.c for details):
 
--d                 
+-d
    This flag turns on the ability for threads to deadlock.
    When you pass -d to the program, every other thread calls vector_add()
-   with the vectors in a different order, e.g., with two threads, and -d enabled, 
+   with the vectors in a different order, e.g., with two threads, and -d enabled,
    Thread 0 calls vector_add(v1, v2) and Thread 1 calls vector_add(v2, v1)
 
 -p
@@ -80,10 +80,49 @@ Each program takes the same set of arguments (see main-common.c for details):
 -l loops
    How many times should each thread call vector_add()?
 
--v 
+-v
    Verbose flag: prints out a little more about what is going on.
 
 -t
    Turns on timing and shows how long everything took.
 
+Question 1:
+1) Manchmal läuft Thread 2 als erstes
 
+Question 2:
+1) Die Vektor Zahlen werden umgedreht,
+durch umdrehen von src und dst werden auch die Locks umgedreht was zu einem Deadlock führen kann
+2) Es ist nicht immer ein Deadlock
+
+Question 3:
+1) Bei mehreren Threads ist die wahrscheinlichkeit höher und bei einem Thread passiert kein Deadlock
+
+Question 4:
+1) Bei der Version wird immer die Reihenfolge der src und dst g3ewährleistet,
+sodass kein Deadlock entsteht
+2) Weil man dann nur 1. Locken muss
+
+Question 5:
+1) ca. 0.05 Sekunden
+2) Number of Loops braucht expontiell Länger, Number of Threads ist nicht skalierbar also auch Länger
+
+Question 6:
+1) Es läuft deutlich Schneller
+
+Question 7:
+1) Ja man braucht den ersten trylock()
+2) Je mehr Threads und Loops desto mehr Retries
+
+Question 8:
+1) Die anderen Threads müssen auf den Global lock warten
+2) Das Programm ist genau so schnell wie vector-global-order.c
+Beide sind jedoch Schneller als vector-try-wait.c
+Mit dem -p flag ändert sich nicht viel
+
+Question 9:
+1) Es macht circa das Gleiche wie bei den anderen da es Atomic ausgeführt wird
+Aber es können trotzdem unterschiedliche ERgebnisse rauskommen
+, da die einzelnen bereiche Unterschiedlich ablaufen können
+
+Question 10:
+1) Ohne -p die no-lock version ist langsamer, aber mit -p kann sie mit den anderen mithalten
